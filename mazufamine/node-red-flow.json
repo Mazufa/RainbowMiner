@@ -1,0 +1,67 @@
+[
+  {
+    "id": "mazufa-read",
+    "type": "tab",
+    "label": "MazufaMine — vain luku",
+    "disabled": false,
+    "info": "Paikallinen lukuintegraatio. Ei louhinta- tai kaupankäyntikomentoja."
+  },
+  {
+    "id": "poll",
+    "type": "inject",
+    "z": "mazufa-read",
+    "name": "15 sekunnin välein",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "15",
+    "once": true,
+    "onceDelay": 1,
+    "payload": "",
+    "payloadType": "date",
+    "x": 180,
+    "y": 100,
+    "wires": [
+      [
+        "get-status"
+      ]
+    ]
+  },
+  {
+    "id": "get-status",
+    "type": "http request",
+    "z": "mazufa-read",
+    "name": "MazufaMine status",
+    "method": "GET",
+    "ret": "obj",
+    "paytoqs": "ignore",
+    "url": "http://127.0.0.1:8787/api/status",
+    "persist": false,
+    "senderr": false,
+    "headers": [],
+    "x": 420,
+    "y": 100,
+    "wires": [
+      [
+        "show"
+      ]
+    ]
+  },
+  {
+    "id": "show",
+    "type": "debug",
+    "z": "mazufa-read",
+    "name": "Seurantatiedot",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "targetType": "msg",
+    "x": 660,
+    "y": 100,
+    "wires": []
+  }
+]
